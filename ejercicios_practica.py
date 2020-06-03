@@ -346,53 +346,69 @@ def ej5():
        recorre la lista de palabras y busca la mayor según el motivo ingresado ("1" o "2")
 
     '''
+    print('-----------------NUEVO EJERCICIO 5-----------------------------------')
+    lista_palabras = []
+    anulador_2 = 0
+    contador = 0
+    
+    cant_palabras = int(input("Indique cuantas palabras desea ingresar: "))
+    
+    for i in range(cant_palabras):
+        contador = 0
+        if i == 0:
+            palabra = input("Ingrese una palabra: ")
+            lista_palabras.append(palabra)
+        else:
+            palabra = input("Ingrese una palabra: ")
+            for j in range(len(lista_palabras)):
+                if palabra == lista_palabras[j]:
+                    # Quería hacer terminar el programa pero no me finaliza
+                    print("¡ATENCIÓN!, ha repetido una palabra")
+                    print("La repetición de una palabra no se registra")
+                else:
+                    if contador == 0:
+                        lista_palabras.append(palabra)
+                        contador += 1
+                    if len(palabra) == len(lista_palabras[j]):
+                        print("Palabra con igual cantidad de letras")
+                        print("No será posible ordenar por letras") 
+                        anulador_2 += 1                
+    opcion = 0
     while True:
-        print('1 - Ordenar por orden alfabético (usando el operador ">")')
-        print('2 - Ordenar por cantidad de letras (longitud de la palabra)')
-        print('3 - Salir del programa')
+        if anulador_2 == 0:
+            print('------------------------------------------')
+            print('Elija su opción:')
+            print('1 - Ordenar palabras por orden alfabético')
+            print('2 - Ordenar palabras por cantidad de letras')
+            print('3 - Salir del programa')
+            print('------------------------------------------')
+            opcion = int(input('Ingrese su opción: '))
+        else:
+            print('------------------------------------------')
+            print('Elija su opción')
+            print('1 - Ordenar palabras por orden alfabético')
+            print('3 - Salir del programa')
+            print('------------------------------------------')
+            opcion = int(input('Ingrese su opción'))
         
-        opción = int(input('Indique su opción\n'))
-        
-        if opción == 1:
-            palabras_deseadas = int(input('Indique cuantas palabras desea ingresar\n'))
-            lista_palabras = []
-            for i in range(palabras_deseadas):
-                palabra = input('Ingrese una palabra: ')             
-                lista_palabras.append(palabra)
-            
-            palabra_mayor = lista_palabras[0]
-            
-            for i in range(palabras_deseadas):
-                if lista_palabras[i] > palabra_mayor:
-                        palabra_mayor = lista_palabras[i]
-                
-            print('La palabra alfabéticamente mayor es', palabra_mayor)
-            lista_palabras.sort(reverse=True)  # Este método lo encontré en Internet porque no pude ordenarlas con condicionales
-            print('Palabras ordenadas de mayor a menor', lista_palabras)
-
-        elif opción == 2:
-            palabras_deseadas = int(input('Indique cuantas palabras desee ingresar\n'))
-            lista_palabras = []
-            # Hacemos que ingresen las palabras:       
-            for i in range(palabras_deseadas):
-                palabra = input('Ingrese una palabra: ')             
-                lista_palabras.append(palabra)
-            
-            palabra_mayor = lista_palabras[0]
-            # Buscamos la palabra con mayor cantidad de letras
-            for i in range(palabras_deseadas):
-                if len(lista_palabras[i]) > len(palabra_mayor):
-                    palabra_mayor = lista_palabras[i]
-                
-            print(palabra_mayor)
-
-        elif opción == 3:
-            print('Programa terminado. Hasta luego...')
+        if opcion == 1:
+            lista_palabras.sort(reverse=True)
+            print(lista_palabras)
+            print('La palabra mas grande alfabéticamente es', lista_palabras[0])
             break
         
+        elif opcion == 2:
+            for i in range(len(lista_palabras)-1):
+                if len(lista_palabras[i+1]) > len(lista_palabras[i]):
+                    cant_letras = lista_palabras[i+1]
+            print(cant_letras)
+            break
+        
+        elif opcion == 3:
+            break
         else:
             print('Ha ingresado una opción no válida')
-    
+
 if __name__ == '__main__':
     print("Ejercicios de práctica")
     #ej1()
